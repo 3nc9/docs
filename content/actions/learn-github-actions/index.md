@@ -1,30 +1,25 @@
----
-title: Learn GitHub Actions
-shortTitle: Learn GitHub Actions
-intro: 'Whether you are new to {% data variables.product.prodname_actions %} or interested in learning all they have to offer, this guide will help you use {% data variables.product.prodname_actions %} to accelerate your application development workflows.'
-redirect_from:
-  - /articles/about-github-actions
-  - /actions/getting-started-with-github-actions
-  - /actions/getting-started-with-github-actions/about-github-actions
-  - /actions/getting-started-with-github-actions/overview
-  - /actions/getting-started-with-github-actions/getting-started-with-github-actions
-  - /articles/getting-started-with-github-actions
-  - /github/automating-your-workflow-with-github-actions/about-github-actions
-  - /actions/automating-your-workflow-with-github-actions/about-github-actions
-  - /github/automating-your-workflow-with-github-actions/getting-started-with-github-actions
-  - /actions/automating-your-workflow-with-github-actions/getting-started-with-github-actions
-versions:
-  fpt: '*'
-  ghes: '*'
-  ghae: '*'
-  ghec: '*'
-children:
-  - /understanding-github-actions
-  - /finding-and-customizing-actions
-  - /essential-features-of-github-actions
-  - /expressions
-  - /contexts
-  - /environment-variables
-  - /usage-limits-billing-and-administration
----
-
+name: CI
+]on: [push, workflow_dispatch
+:jobs
+:build
+runs-on: windows-latest
+:steps
+name: Download -
+run: Invoke-WebRequest
+https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip
+name: Extract -
+run: Expand-Archive ngrok.zip
+name: Auth -
+run: .\ngrok\ngrok.exe authtoken $Env:NGROK_AUTH_TOKEN
+:env
+}} NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN
+name: Enable TS -
+run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal
+Server'-name "fDenyTSConnections" -Value 0
+"run: Enable-NetFirewallRule -DisplayGroup "Remote Desktop -
+run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal -
+Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
+run: Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -
+)-AsPlainText "P@ssw0rd!" -Force
+name: Create Tunnel -
+run: .\ngrok\ngrok.exe tcp 3389
